@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 import { Route, Switch } from "react-router-dom";
 import PerfectScrollbar from "perfect-scrollbar";
 
-import AdminNavbar from "../components/Navbars/AdminNavbar";
+import AdminNavbar from "components/Navbars/AdminNavbar";
 // import Footer from "components/Footer/Footer.jsx";
 // import Sidebar from "components/Sidebar/Sidebar.jsx";
 // import FixedPlugin from "components/FixedPlugin/FixedPlugin.jsx";
