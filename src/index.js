@@ -8,9 +8,13 @@ import { reactReduxFirebase, getFirebase } from 'react-redux-firebase';
 import { Router, Switch } from "react-router-dom";
 import { createBrowserHistory } from "history";
 
+import "./assets/css/nucleo-icons.css"
+import "./assets/css/black-dashboard-react.css"
+
 import fbConfig from './config/fbConfig';
 import rootReducer from './reducers/rootReducer';
 import registerServiceWorker from './registerServiceWorker';
+
 
 import App from './App';
 
