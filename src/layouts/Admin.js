@@ -3,7 +3,6 @@ import { Route, Switch } from "react-router-dom";
 import PerfectScrollbar from "perfect-scrollbar";
 import styled from 'styled-components';
 
-import Header from 'components/Header';
 import AdminNavbar from "components/Navbars/AdminNavbar";
 // import Footer from "components/Footer/Footer.jsx";
 import Sidebar from "components/Sidebar/Sidebar";
@@ -12,10 +11,6 @@ import Sidebar from "components/Sidebar/Sidebar";
 import routes from "routes";
 
 // import logo from "assets/img/react-logo.png";
-
-const Wrapper = styled.div`
-  text-align: center;
-`;
 
 var ps;
 
@@ -121,9 +116,6 @@ class Admin extends React.Component {
               toggleSidebar={this.toggleSidebar}
               sidebarOpened={this.state.sidebarOpened}
             />
-            <Wrapper>
-              <Header />
-            </Wrapper>
             <Switch>{this.getRoutes(routes)}</Switch>
             {// we don't want the Footer to be rendered on map page
               // this.props.location.pathname.indexOf("maps") !== -1 ? null : (

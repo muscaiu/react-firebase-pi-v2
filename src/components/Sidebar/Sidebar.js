@@ -15,10 +15,9 @@ var ps;
 class Sidebar extends React.Component {
   constructor(props) {
     super(props);
-    this.activeRoute.bind(this);
   }
   // verifies if routeName is the one active (in browser input)
-  activeRoute(routeName) {
+  activeRoute = (routeName) => {
     return this.props.location.pathname.indexOf(routeName) > -1 ? "active" : "";
   }
   componentDidMount() {

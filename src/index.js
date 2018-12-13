@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import { reduxFirestore, getFirestore } from 'redux-firestore';
 import { reactReduxFirebase, getFirebase } from 'react-redux-firebase';
-import { Router, Switch, Route } from "react-router-dom";
+import { Router, Switch, Route, Redirect } from "react-router-dom";
 import { createBrowserHistory } from "history";
 
 import "./assets/css/nucleo-icons.css"
@@ -15,7 +15,7 @@ import fbConfig from './config/fbConfig';
 import rootReducer from './reducers/rootReducer';
 import registerServiceWorker from './registerServiceWorker';
 
-import App from './App';
+// import App from './App';
 import AdminLayout from './layouts/Admin';
 
 const store = createStore(rootReducer,
@@ -32,8 +32,8 @@ ReactDOM.render(
     <Provider store={store}>
         <Router history={hist}>
             <Switch>
-                <Route exact path="/" render={props => <App {...props} />} />
-                <Route path="/admin" render={props => <AdminLayout {...props} />} />
+                <Route path="/" render={props => <AdminLayout {...props} />} />
+                <Redirect from="/" to="/admin/dashboard" />
             </Switch>
         </Router>
     </Provider>

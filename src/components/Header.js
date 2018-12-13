@@ -5,7 +5,6 @@ import { firestoreConnect, isLoaded } from 'react-redux-firebase';
 import { compose } from 'redux';
 
 import Spinner from 'components/Spinner';
-import Log from 'components/Log';
 import OnOffSwitch from './OnOffSwitch';
 import AutoManualSwitch from './AutoManualSwitch';
 // import Weather from './Weather';
@@ -60,21 +59,12 @@ class Header extends Component {
           isLoaded(fbStatus) ?
             <div>
               <Spinner isActive={fbStatus} />
-              <AutoManualSwitch
-                mode={fbMode}
-                onModeClick={this.hanldeToggleMode}
-              />
               <OnOffSwitch
-                isEnabled={fbMode === 'auto'}
                 isActive={fbStatus}
                 onStatusClick={this.hanldeToggleStats}
                 fbLastAction={fbLastAction}
                 fbTotal={fbTotal}
-              />
-              <Log
-                lastAction={fbLastAction}
                 mode={fbMode}
-                isActive={fbStatus}
               />
               {/* {lastWeatherUpdate &&
                 <Weather lastWeatherUpdate={lastWeatherUpdate} />

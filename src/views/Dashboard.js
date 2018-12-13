@@ -3,7 +3,6 @@ import React, { Fragment } from "react";
 import classNames from "classnames";
 // react plugin used to create charts
 import { Line, Bar, Pie } from "react-chartjs-2";
-
 // reactstrap components
 import {
   Button,
@@ -33,6 +32,8 @@ import {
   chartExample4
 } from "variables/charts";
 
+import Header from 'components/Header';
+
 class Dashboard extends React.Component {
   constructor(props) {
     super(props);
@@ -50,6 +51,23 @@ class Dashboard extends React.Component {
       <Fragment>
         <div className="content">
           <Row>
+            <Col md="12">
+              <Card>
+                <CardBody>
+                  <div className="places-buttons">
+                    <Row>
+                      <Col className="ml-auto mr-auto text-center" md="6">
+                        <CardTitle tag="h4">
+                          <Header />
+                        </CardTitle>
+                      </Col>
+                    </Row>
+                  </div>
+                </CardBody>
+              </Card>
+            </Col>
+          </Row>
+          {/* <Row>
             <Col md="12">
               <Card>
                 <CardBody>
@@ -89,7 +107,7 @@ class Dashboard extends React.Component {
                 </CardBody>
               </Card>
             </Col>
-          </Row>
+          </Row> */}
           <Row>
             <Col xs="12">
               <Card className="card-chart">
