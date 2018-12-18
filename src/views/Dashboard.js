@@ -2,10 +2,7 @@ import React, { Fragment } from "react";
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // react plugin used to create charts
-import { Line, Bar, Pie } from "react-chartjs-2";
-import { connect } from 'react-redux';
-import { firestoreConnect, isLoaded } from 'react-redux-firebase';
-import { compose } from 'redux';
+import { Line, Pie } from "react-chartjs-2";
 
 // reactstrap components
 import {
@@ -31,12 +28,12 @@ import {
 // core components
 import {
   chartExample1,
-  chartExample2,
-  chartExample3,
   chartExample4
 } from "variables/charts";
 
 import Header from 'components/Header';
+import LineChart from 'components/Charts/LineChart';
+import BarChart from 'components/Charts/BarChart';
 
 class Dashboard extends React.Component {
   constructor(props) {
@@ -51,9 +48,7 @@ class Dashboard extends React.Component {
     });
   };
   render() {
-    const { fbTotal } = this.props;
-    console.log(fbTotal);
-    const chartData = fbTotal && fbTotal.map(item => Math.floor(item.total / 60));
+
 
     return (
       <Fragment>
@@ -224,43 +219,7 @@ class Dashboard extends React.Component {
                 </CardHeader>
                 <CardBody>
                   <div className="chart-area">
-                    <Line
-                      data={
-                        canvas => {
-                          let ctx = canvas.getContext("2d");
-
-                          let gradientStroke = ctx.createLinearGradient(0, 230, 0, 50);
-
-                          gradientStroke.addColorStop(1, "rgba(29,140,248,0.2)");
-                          gradientStroke.addColorStop(0.4, "rgba(29,140,248,0.0)");
-                          gradientStroke.addColorStop(0, "rgba(29,140,248,0)"); //blue colors
-
-                          return {
-                            labels: ["MON", "TUE", "WED", "THU", "FRI"],
-                            datasets: [
-                              {
-                                label: "Minutes",
-                                fill: true,
-                                backgroundColor: gradientStroke,
-                                borderColor: "#1f8ef1",
-                                borderWidth: 2,
-                                borderDash: [],
-                                borderDashOffset: 0.0,
-                                pointBackgroundColor: "#1f8ef1",
-                                pointBorderColor: "rgba(255,255,255,0)",
-                                pointHoverBackgroundColor: "#1f8ef1",
-                                pointBorderWidth: 20,
-                                pointHoverRadius: 4,
-                                pointHoverBorderWidth: 15,
-                                pointRadius: 4,
-                                data: chartData
-                              }
-                            ]
-                          };
-                        }
-                      }
-                      options={chartExample2.options}
-                    />
+                    <LineChart />
                   </div>
                 </CardBody>
               </Card>
@@ -276,37 +235,7 @@ class Dashboard extends React.Component {
                 </CardHeader>
                 <CardBody>
                   <div className="chart-area">
-                    <Bar
-                      data={
-                        canvas => {
-                          let ctx = canvas.getContext("2d");
-
-                          let gradientStroke = ctx.createLinearGradient(0, 230, 0, 50);
-
-                          gradientStroke.addColorStop(1, "rgba(72,72,176,0.1)");
-                          gradientStroke.addColorStop(0.4, "rgba(72,72,176,0.0)");
-                          gradientStroke.addColorStop(0, "rgba(119,52,169,0)"); //purple colors
-
-                          return {
-                            labels: ["MON", "TUE", "WED", "THU", "FRI"],
-                            datasets: [
-                              {
-                                label: "Minutes",
-                                fill: true,
-                                backgroundColor: gradientStroke,
-                                hoverBackgroundColor: gradientStroke,
-                                borderColor: "#d048b6",
-                                borderWidth: 2,
-                                borderDash: [],
-                                borderDashOffset: 0.0,
-                                data: chartData
-                              }
-                            ]
-                          };
-                        }
-                      }
-                      options={chartExample3.options}
-                    />
+                    <BarChart />
                   </div>
                 </CardBody>
               </Card>
@@ -668,15 +597,4 @@ class Dashboard extends React.Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    fbTotal: state.firestore.ordered.total
-  }
-}
-
-export default compose(
-  connect(mapStateToProps),
-  firestoreConnect([
-    { collection: 'total' }
-  ])
-)(Dashboard);
+export default Dashboard;

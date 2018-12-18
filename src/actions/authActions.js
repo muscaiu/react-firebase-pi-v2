@@ -39,7 +39,7 @@ export const login = (credentials, option, fbLastAction, fbTotal) => {
             console.log('found ' + selectFbTotal.total + " seconds in db");
             firestore.collection('total').doc(today).update({
               total: calculateDiff + selectFbTotal.total,
-              createdAt: firestore.FieldValue.serverTimestamp()
+              updatedAt: firestore.FieldValue.serverTimestamp()
             })
           }
         }

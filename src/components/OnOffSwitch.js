@@ -70,7 +70,7 @@ class OnOffSwitch extends Component {
     this.handleClose();
   };
 
-  getDistance = () => moment(this.props.fbLastAction.toDate()).from();
+  getDistance = () => this.props.fbLastAction && moment(this.props.fbLastAction.toDate()).from();
 
   render() {
     const { isActive, isEnabled, mode } = this.props;
