@@ -4,18 +4,18 @@ import Notifications from "views/Notifications";
 
 var routes = [
   {
-    path: "/dashboard",
+    path: "/",
     name: "Dashboard",
     icon: "tim-icons icon-chart-pie-36",
     component: Dashboard,
-    layout: "/admin"
+    layout: "/"
   },
   {
     path: "/notifications",
     name: "Notifications",
     icon: "tim-icons icon-bell-55",
     component: Notifications,
-    layout: "/admin"
+    layout: "/"
   },
   // {
   //   path: "/user-profile",

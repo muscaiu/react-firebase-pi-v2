@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import { reduxFirestore, getFirestore } from 'redux-firestore';
 import { reactReduxFirebase, getFirebase } from 'react-redux-firebase';
-import { Router, Switch, Route, Redirect } from "react-router-dom";
+import { Router, Switch, Route } from "react-router-dom";
 import { createBrowserHistory } from "history";
 
 import "./assets/css/nucleo-icons.css"
@@ -33,7 +33,7 @@ ReactDOM.render(
         <Router history={hist}>
             <Switch>
                 <Route path="/" render={props => <AdminLayout {...props} />} />
-                <Redirect from="/" to="/admin/dashboard" />
+                {/* <Redirect from="/" to="/dashboard" /> */}
             </Switch>
         </Router>
     </Provider>

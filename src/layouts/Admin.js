@@ -1,11 +1,11 @@
 import React, { Fragment } from "react";
 import { Route, Switch } from "react-router-dom";
 import PerfectScrollbar from "perfect-scrollbar";
-import styled from 'styled-components';
+// import styled from 'styled-components';
 
 import AdminNavbar from "components/Navbars/AdminNavbar";
 // import Footer from "components/Footer/Footer.jsx";
-import Sidebar from "components/Sidebar/Sidebar";
+// import Sidebar from "components/Sidebar/Sidebar";
 // import FixedPlugin from "components/FixedPlugin/FixedPlugin.jsx";
 
 import routes from "routes";
@@ -61,10 +61,12 @@ class Admin extends React.Component {
   };
   getRoutes = routes => {
     return routes.map((prop, key) => {
-      if (prop.layout === "/admin") {
+      // if (prop.layout === "/admin") {
+      if (prop.layout === "/") {
         return (
           <Route
-            path={prop.layout + prop.path}
+            // path={prop.layout + prop.path}
+            path={prop.path}
             component={prop.component}
             key={key}
           />
@@ -93,7 +95,7 @@ class Admin extends React.Component {
     return (
       <Fragment>
         <div className="wrapper">
-          <Sidebar
+          {/* <Sidebar
             {...this.props}
             routes={routes}
             bgColor={this.state.backgroundColor}
@@ -103,16 +105,16 @@ class Admin extends React.Component {
             //   imgSrc: logo
             // }}
             toggleSidebar={this.toggleSidebar}
-          />
+          /> */}
           <div
-            className="main-panel"
+            // className="main-panel"
             ref="mainPanel"
             data={this.state.backgroundColor}
           >
             <AdminNavbar
               {...this.props}
               // brandText={this.getBrandText(this.props.location.pathname)}
-              brandText={'Dashboard'}
+              // brandText={'Dashboard'}
               toggleSidebar={this.toggleSidebar}
               sidebarOpened={this.state.sidebarOpened}
             />

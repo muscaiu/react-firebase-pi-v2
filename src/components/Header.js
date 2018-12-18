@@ -6,7 +6,6 @@ import { compose } from 'redux';
 
 import Spinner from 'components/Spinner';
 import OnOffSwitch from './OnOffSwitch';
-import AutoManualSwitch from './AutoManualSwitch';
 // import Weather from './Weather';
 import pack from '../../package.json'
 import moment from 'moment';

@@ -11,15 +11,11 @@ db.settings({ timestampsInSnapshots: true })
 
 var statusRef = db.collection('status');
 var modeRef = db.collection('mode');
-var versionsRef = db.collection('versions');
 
 let ignoreExistingStateEntries = true;
 let ignoreExistingModeEntries = true;
 let mode = 'unititialized'
 
-versionsRef.doc('apiVersion').update({
-  value: pack.version
-})
 
 modeRef
   .orderBy('createdAt', 'desc')
