@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Bar } from "react-chartjs-2";
 import { connect } from 'react-redux';
-import { firestoreConnect, isLoaded } from 'react-redux-firebase';
+import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
 
 import {

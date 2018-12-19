@@ -2,23 +2,17 @@ import React, { Fragment } from "react";
 
 import {
   Card,
-  CardHeader,
+  // CardHeader,
   CardBody,
   CardTitle,
   Row,
   Col,
 } from "reactstrap";
 
-// core components
 import Header from 'components/Header';
 import LineChart from 'components/Charts/LineChart';
-import BarChart from 'components/Charts/BarChart';
-import PieChart from 'components/Charts/PieChart';
-import MultiChart from 'components/Charts/MultiChart';
-import TableEditable from 'components/Tables/TableEditable';
-import TableSimple from 'components/Tables/TableSimple';
-import Notifications from 'views/Notifications';
-
+// import MultiChart from 'components/Charts/MultiChart';
+import NotificationAlert from "react-notification-alert";
 class Dashboard extends React.Component {
   constructor(props) {
     super(props);
@@ -31,8 +25,26 @@ class Dashboard extends React.Component {
       bigChartData: name
     });
   };
-  render() {
+  showNotification = (place, type, message) => {
+    // primary, success, dandger, warning, info
 
+    var options = {};
+    options = {
+      place,
+      message: (
+        <div>
+          <div>
+            {message}
+          </div>
+        </div>
+      ),
+      type,
+      icon: "tim-icons icon-bell-55",
+      autoDismiss: 3
+    };
+    this.refs.notificationAlert.notificationAlert(options);
+  };
+  render() {
     return (
       <Fragment>
         <div className="content">
@@ -44,7 +56,7 @@ class Dashboard extends React.Component {
                     <Row>
                       <Col className="ml-auto mr-auto text-center" md="6">
                         <CardTitle tag="h4">
-                          <Header />
+                          <Header showNotification={this.showNotification} />
                         </CardTitle>
                       </Col>
                     </Row>
@@ -77,12 +89,13 @@ class Dashboard extends React.Component {
               <TableSimple />
             </Col>
           </Row> */}
-          <Row>
+          {/* <Row>
             <Col xs="12">
               <Notifications />
             </Col>
-          </Row>
+          </Row> */}
         </div>
+        <NotificationAlert ref="notificationAlert" />
       </Fragment>
     );
   }

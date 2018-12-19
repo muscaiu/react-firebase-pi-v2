@@ -1,18 +1,10 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import styled from 'styled-components';
 import moment from 'moment';
 
 import Switch from '@material-ui/core/Switch';
-import TextField from '@material-ui/core/TextField';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogTitle from '@material-ui/core/DialogTitle';
 
-import { Button } from "reactstrap";
-
-import * as authActions from '../actions/authActions';
+import Modal from 'components/Modal/Modal';
 
 const OnOff = styled.span`
   ${props => `color: ${props.color}`};
@@ -29,44 +21,36 @@ const Distance = styled.div`
 const AutoModeLog = styled.div`
   font-size: 13px;
   color: #BDBDBD;
-`
+`;
 
 class OnOffSwitch extends Component {
 
   state = {
-    open: false,
-    password: ''
-  };
-
-  handlePasswordChange = (e) => {
-    this.setState({ password: e.target.value })
-  };
-
-  handleClickOpen = () => {
-    this.setState({ open: true });
-  };
-
-  handleClose = () => {
-    this.setState({ open: false });
-  };
-
-  handleLogin = () => {
-    const { password } = this.state;
-    const { fbLastAction, fbTotal, mode } = this.props;
-    const credentials = {
-      email: 'admin@yahoo.com',
-      password
-    }
-
-    this.props.login(credentials, this.props.isActive, fbLastAction, fbTotal)
-    this.setState({ password: '' })
-    this.handleClose();
-  };
+    showModal: false,
+    dialogType: ''
+  }
 
   getDistance = () => this.props.fbLastAction && moment(this.props.fbLastAction.toDate()).from();
 
+  handleToggleModal = (toggle, title) => {
+    this.setState(
+      {
+        showModal: toggle,
+        dialogType: title
+      }
+    );
+  }
+
   render() {
-    const { isActive, isEnabled, mode } = this.props;
+    const {
+      isActive,
+      mode,
+      fbLastAction,
+      fbTotal,
+      showNotification
+      // isEnabled
+    } = this.props;
+    const { showModal, dialogType } = this.state;
 
     return (
       <div>
@@ -74,7 +58,7 @@ class OnOffSwitch extends Component {
           <OnOff color={mode === 'manual' ? '#7AC943' : '#BDBDBD'}>Manual</OnOff>
           <Switch
             checked={mode === 'auto'}
-            onChange={this.handleClickOpen}
+            onChange={() => this.handleToggleModal(true, 'mode')}
             value="mode"
             color="primary"
           />
@@ -86,7 +70,7 @@ class OnOffSwitch extends Component {
           <Switch
             disabled={mode === 'auto'}
             checked={isActive}
-            onChange={this.handleClickOpen}
+            onChange={() => this.handleToggleModal(true, 'onoff')}
             value="isActive"
             color="primary"
           />
@@ -102,36 +86,20 @@ class OnOffSwitch extends Component {
           </AutoModeLog>
         </LogWrapper>
 
-        <Dialog
-          open={this.state.open}
-          onClose={this.handleClose}
-          aria-labelledby="form-dialog-title"
-        >
-          <DialogTitle id="form-dialog-title">needs the password</DialogTitle>
-          <DialogContent>
-            <TextField
-              autoFocus
-              margin="dense"
-              id="password"
-              label="password"
-              type="text"
-              fullWidth
-              onChange={this.handlePasswordChange}
-              onKeyPress={(ev) => ev.key === 'Enter' && this.handleLogin()}
-            />
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={this.handleClose} color="secondary">
-              Cancel
-            </Button>
-            <Button onClick={this.handleLogin} color="primary">
-              Confirm
-            </Button>
-          </DialogActions>
-        </Dialog>
+        <Modal
+          type={dialogType}
+          show={showModal}
+          onClose={() => this.handleToggleModal(false)}
+          showNotification={showNotification}
+          fbLastAction={fbLastAction}
+          fbTotal={fbTotal}
+          isActive={isActive}
+          mode={mode}
+        />
+
       </div>
     );
   }
 };
 
-export default connect(null, authActions)(OnOffSwitch);
+export default OnOffSwitch;

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Pie } from "react-chartjs-2";
 import { connect } from 'react-redux';
-import { firestoreConnect, isLoaded } from 'react-redux-firebase';
+import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
 
 import {
@@ -18,7 +18,7 @@ import {
 class LineChart extends Component {
 
     render() {
-        const chartData = [10, 20, 30, 40]
+        // const chartData = [10, 20, 30, 40]
 
         return (
             <Card className="card-chart">

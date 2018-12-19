@@ -23,15 +23,15 @@ class LineChart extends Component {
 
   getTotalPerDay = (days) => {
     return this.props.fbTotal && this.props.fbTotal.find(val =>
-      moment(val.createdAt.toDate()).isSame(moment().subtract(days, 'day'), 'day')
+      val.createdAt && moment(val.createdAt.toDate()).isSame(moment().subtract(days, 'day'), 'day')
     )
   }
 
   render() {
-    const daysArray = [0, 1, 2, 3, 4, 5, 6]
+    const daysArray = [6, 5, 4, 3, 2, 1, 0]
     const labels = daysArray.map(day => this.getDay(day))
-    const lastWeek = daysArray.map(day => this.getTotalPerDay(day) ? this.getTotalPerDay(day).total : 0)
-    const totalLastWeek = (lastWeek.reverse().reduce((acc, curr) => acc + curr) / 60).toFixed(1)
+    const lastWeek = daysArray.map(day => this.getTotalPerDay(day) ? Math.floor(this.getTotalPerDay(day).total / 60) : 0)
+    const totalLastWeek = (lastWeek.reduce((acc, curr) => acc + curr) / 60).toFixed(1)
 
     return (
       // isLoaded(this.props.fbTotal) ? (

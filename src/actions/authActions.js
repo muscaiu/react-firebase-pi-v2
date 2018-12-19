@@ -1,6 +1,6 @@
 import moment from 'moment';
 
-export const login = (credentials, option, fbLastAction, fbTotal) => {
+export const login = (credentials, option, fbLastAction, fbTotal, notify) => {
   return (dispatch, getState, { getFirebase, getFirestore }) => {
 
     const firebase = getFirebase();
@@ -42,6 +42,9 @@ export const login = (credentials, option, fbLastAction, fbTotal) => {
               updatedAt: firestore.FieldValue.serverTimestamp()
             })
           }
+          notify(`Success, Status OFF`, 'br', 'success')
+        } else {
+          notify(`Success, Status ON`, 'br', 'success')
         }
       }
 
@@ -50,9 +53,11 @@ export const login = (credentials, option, fbLastAction, fbTotal) => {
           value: option === 'manual' ? 'auto' : 'manual',
           createdAt: firestore.FieldValue.serverTimestamp(),
         })
+        notify(`Success, Mode ${option === 'manual' ? 'Auto' : 'Manual'}`, 'br', 'success')
       }
     }).catch((err) => {
       console.log('login error', err);
+      notify(`Wrong password!`, 'br', 'danger')
     })
   }
 }

@@ -3,7 +3,7 @@ import { Route, Switch } from "react-router-dom";
 import PerfectScrollbar from "perfect-scrollbar";
 // import styled from 'styled-components';
 
-import AdminNavbar from "components/Navbars/AdminNavbar";
+// import AdminNavbar from "components/Navbars/AdminNavbar";
 // import Footer from "components/Footer/Footer.jsx";
 // import Sidebar from "components/Sidebar/Sidebar";
 // import FixedPlugin from "components/FixedPlugin/FixedPlugin.jsx";
@@ -91,9 +91,11 @@ class Admin extends React.Component {
   //   }
   //   return "Brand";
   // };
+
   render() {
     return (
       <Fragment>
+        
         <div className="wrapper">
           {/* <Sidebar
             {...this.props}

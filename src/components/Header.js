@@ -6,7 +6,6 @@ import { compose } from 'redux';
 
 import Spinner from 'components/Spinner';
 import OnOffSwitch from './OnOffSwitch';
-// import Weather from './Weather';
 import pack from '../../package.json'
 import moment from 'moment';
 
@@ -50,7 +49,7 @@ class Header extends Component {
   }
 
   render() {
-    const { fbStatus, fbMode, fbLastAction, fbTotal } = this.props;
+    const { fbStatus, fbMode, fbLastAction, fbTotal, showNotification } = this.props;
 
     return (
       <Wrapper>
@@ -64,10 +63,8 @@ class Header extends Component {
                 fbLastAction={fbLastAction}
                 fbTotal={fbTotal}
                 mode={fbMode}
+                showNotification={showNotification}
               />
-              {/* {lastWeatherUpdate &&
-                <Weather lastWeatherUpdate={lastWeatherUpdate} />
-              } */}
               <Version>version: {pack.version}</Version>
             </div>
             : null
