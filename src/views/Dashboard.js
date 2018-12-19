@@ -17,6 +17,7 @@ import PieChart from 'components/Charts/PieChart';
 import MultiChart from 'components/Charts/MultiChart';
 import TableEditable from 'components/Tables/TableEditable';
 import TableSimple from 'components/Tables/TableSimple';
+import Notifications from 'views/Notifications';
 
 class Dashboard extends React.Component {
   constructor(props) {
@@ -57,7 +58,7 @@ class Dashboard extends React.Component {
               <LineChart />
             </Col>
           </Row>
-          <Row>
+          {/* <Row>
             <Col lg="4">
               <MultiChart />
             </Col>
@@ -74,6 +75,11 @@ class Dashboard extends React.Component {
             </Col>
             <Col lg="6" md="12">
               <TableSimple />
+            </Col>
+          </Row> */}
+          <Row>
+            <Col xs="12">
+              <Notifications />
             </Col>
           </Row>
         </div>

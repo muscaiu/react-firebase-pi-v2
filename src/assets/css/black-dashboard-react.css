@@ -8578,7 +8578,7 @@ fieldset[disabled]
   min-width: 450px;
   border-radius: 0.4285rem; }
 
-@media screen and (max-width: 991px) {
+/* @media screen and (max-width: 991px) {
   .dropdown-toggle:after {
     display: inline-block;
     width: 0;
@@ -8589,7 +8589,7 @@ fieldset[disabled]
     border-top: .3em solid;
     border-right: .3em solid transparent;
     border-bottom: 0;
-    border-left: .3em solid transparent; } }
+    border-left: .3em solid transparent; } } */
 
 @media screen and (min-width: 992px) {
   .dropdown-menu .dropdown-item {

@@ -67,10 +67,10 @@ class AdminNavbar extends React.Component {
       <Fragment>
         <Navbar
           className={classNames("navbar-absolute", this.state.color)}
-          expand="lg"
+          expand
         >
           <Container fluid>
-            <div className="navbar-wrapper">
+            {/* <div className="navbar-wrapper">
               <div
                 className={classNames("navbar-toggle d-inline", {
                   toggled: this.props.sidebarOpened
@@ -89,8 +89,8 @@ class AdminNavbar extends React.Component {
               <NavbarBrand href="#pablo" onClick={e => e.preventDefault()}>
                 {this.props.brandText}
               </NavbarBrand>
-            </div>
-            <button
+            </div> */}
+            {/* <button
               aria-expanded={false}
               aria-label="Toggle navigation"
               className="navbar-toggler"
@@ -103,11 +103,11 @@ class AdminNavbar extends React.Component {
               <span className="navbar-toggler-bar navbar-kebab" />
               <span className="navbar-toggler-bar navbar-kebab" />
               <span className="navbar-toggler-bar navbar-kebab" />
-            </button>
+            </button> */}
             <Collapse navbar isOpen={this.state.collapseOpen}>
               <Nav className="ml-auto" navbar>
-                <InputGroup className="search-bar">
-                </InputGroup>
+                {/* <InputGroup className="search-bar">
+                </InputGroup> */}
                 <UncontrolledDropdown nav>
                   <DropdownToggle
                     caret
@@ -117,7 +117,6 @@ class AdminNavbar extends React.Component {
                   >
                     <div className="notification d-none d-lg-block d-xl-block" />
                     <i className="tim-icons icon-sound-wave" />
-                    <p className="d-lg-none">Notifications</p>
                   </DropdownToggle>
                   <DropdownMenu className="dropdown-navbar" right tag="ul">
                     <NavLink tag="li">
@@ -147,7 +146,7 @@ class AdminNavbar extends React.Component {
                     </NavLink>
                   </DropdownMenu>
                 </UncontrolledDropdown>
-                <UncontrolledDropdown nav>
+                {/* <UncontrolledDropdown nav>
                   <DropdownToggle
                     caret
                     color="default"
@@ -173,8 +172,8 @@ class AdminNavbar extends React.Component {
                       <DropdownItem className="nav-item">Log out</DropdownItem>
                     </NavLink>
                   </DropdownMenu>
-                </UncontrolledDropdown>
-                <li className="separator d-lg-none" />
+                </UncontrolledDropdown> */}
+                {/* <li className="separator d-lg-none" /> */}
               </Nav>
             </Collapse>
           </Container>

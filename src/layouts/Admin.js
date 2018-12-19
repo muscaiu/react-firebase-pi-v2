@@ -111,13 +111,13 @@ class Admin extends React.Component {
             ref="mainPanel"
             data={this.state.backgroundColor}
           >
-            <AdminNavbar
+            {/* <AdminNavbar
               {...this.props}
               // brandText={this.getBrandText(this.props.location.pathname)}
               // brandText={'Dashboard'}
               toggleSidebar={this.toggleSidebar}
               sidebarOpened={this.state.sidebarOpened}
-            />
+            /> */}
             <Switch>{this.getRoutes(routes)}</Switch>
             {// we don't want the Footer to be rendered on map page
               // this.props.location.pathname.indexOf("maps") !== -1 ? null : (

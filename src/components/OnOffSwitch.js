@@ -4,31 +4,24 @@ import styled from 'styled-components';
 import moment from 'moment';
 
 import Switch from '@material-ui/core/Switch';
-// import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
-import {
-  Button,
-  Card,
-  CardBody,
-  CardTitle,
-  Label,
-  Row,
-  Col
-} from "reactstrap";
+import { Button } from "reactstrap";
 
 import * as authActions from '../actions/authActions';
 
 const OnOff = styled.span`
   ${props => `color: ${props.color}`};
 `;
-
 const SwitchWrapper = styled.div`
   text-align: center;
+  padding-bottom: 10px;
+`;
+const LogWrapper = styled.div`
 `;
 const Distance = styled.div`
   color: #7AC943;
@@ -87,6 +80,7 @@ class OnOffSwitch extends Component {
           />
           <OnOff color={mode === 'auto' ? '#7AC943' : '#BDBDBD'}>Auto</OnOff>
         </SwitchWrapper>
+
         <SwitchWrapper>
           <OnOff color={isActive ? '#BDBDBD' : '#7AC943'}>Off</OnOff>
           <Switch
@@ -98,22 +92,15 @@ class OnOffSwitch extends Component {
           />
           <OnOff color={isActive ? '#7AC943' : '#BDBDBD'}>On</OnOff>
         </SwitchWrapper>
-        <Card>
-          <CardBody>
-            <Row>
-              <Col className="ml-auto mr-auto text-center" md="6">
-                <CardTitle tag="h4">
-                  <Distance>
-                    {isActive ? 'ON' : 'OFF'} since: {this.getDistance()}
-                  </Distance>
-                  <AutoModeLog>
-                    Auto interval : 19:00 - 20:00
-                  </AutoModeLog>
-                </CardTitle>
-              </Col>
-            </Row>
-          </CardBody>
-        </Card>
+
+        <LogWrapper>
+          <Distance>
+            {isActive ? 'ON' : 'OFF'} since: {this.getDistance()}
+          </Distance>
+          <AutoModeLog>
+            Auto interval : 19:00 - 20:00
+          </AutoModeLog>
+        </LogWrapper>
 
         <Dialog
           open={this.state.open}
@@ -133,7 +120,6 @@ class OnOffSwitch extends Component {
               onKeyPress={(ev) => ev.key === 'Enter' && this.handleLogin()}
             />
           </DialogContent>
-
           <DialogActions>
             <Button onClick={this.handleClose} color="secondary">
               Cancel
