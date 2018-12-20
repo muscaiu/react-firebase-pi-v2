@@ -49,7 +49,34 @@ class Header extends Component {
   }
 
   render() {
-    const { fbStatus, fbMode, fbLastAction, fbTotal, showNotification } = this.props;
+    const { fbStatus, fbMode, fbLastAction, fbTotal, showNotification, fbStatusList } = this.props;
+
+    const filteredList = fbStatusList && fbStatusList.reverse().reduce((total, currValue, index, array) => {
+      // const today = moment().format('DD-MM-YYYY hh:mm:ss')
+      const currCreated = currValue.createdAt
+      const count = total[currCreated] ? total[currCreated] + 1 : 1
+      console.log(total, index)
+      return {
+        ...total,
+        [moment(currCreated.toDate()).format('DD-MM-YYYY hh:mm:ss')]: count
+      }
+      // const calculateDiff = prevItem.diff(currItem, "seconds");
+
+      // console.log(moment(currValue.createdAt.toDate()).format('DD-MM-YYYY hh:mm:ss'), currIndex)
+    })
+    console.log(filteredList)
+
+    // const filteredList = fbStatusList && fbStatusList.reverse().map((item, index) => {
+    //   const today = moment().format('DD-MM-YYYY hh:mm:ss')
+    //   const selectedDay = moment(item.createdAt.toDate()).format('DD-MM-YYYY hh:mm:ss')
+
+    //   console.log(moment(item.createdAt.toDate()).format('DD-MM-YYYY hh:mm:ss'), item.value, index)
+    //   let i = 0;
+    //   let total = 0
+    //   if (index === i)
+
+    //     return item.createdat
+    // })
 
     return (
       <Wrapper>
@@ -83,14 +110,15 @@ function mapStateToProps(state) {
     fbStatus: fbStatusList && fbStatusList[0].value,
     fbMode: fbModeList && fbModeList[0].value,
     fbLastAction: fbStatusList && fbStatusList[0].createdAt,
-    fbTotal: state.firestore.ordered.total
+    fbTotal: state.firestore.ordered.total,
+    fbStatusList
   }
 }
 
 export default compose(
   connect(mapStateToProps),
   firestoreConnect([
-    { collection: 'status', limit: 1, orderBy: ['createdAt', 'desc'] },
+    { collection: 'status', limit: 4, orderBy: ['createdAt', 'desc'] },
     { collection: 'mode', limit: 1, orderBy: ['createdAt', 'desc'] },
     { collection: 'total' }
   ])
