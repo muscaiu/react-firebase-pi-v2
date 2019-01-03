@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Spinner = ({ isActive }) => (
+const Spinner = () => (
   <div className="preloader">
     <div></div>
   </div>

@@ -6,7 +6,7 @@ import OnOffSwitch from './OnOffSwitch';
 import pack from '../../package.json'
 
 const Wrapper = styled.div`
-  padding-top: 50px;
+  padding-top: 10px;
 `;
 
 const Version = styled.div`
@@ -14,7 +14,6 @@ const Version = styled.div`
   font-size: 8px;
   position: fixed;
   bottom: 10px;
-  padding: 10px;
 `;
 
 class Header extends Component {
