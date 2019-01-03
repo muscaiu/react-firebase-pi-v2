@@ -8,6 +8,7 @@ import { reactReduxFirebase, getFirebase } from 'react-redux-firebase';
 import { Router, Switch, Route } from "react-router-dom";
 import { createBrowserHistory } from "history";
 
+import "./assets/css/spinner.css"
 import "./assets/css/nucleo-icons.css"
 import "./assets/css/black-dashboard-react.css"
 

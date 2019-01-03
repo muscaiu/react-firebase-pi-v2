@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { connect } from 'react-redux';
-import { firestoreConnect, isLoaded } from 'react-redux-firebase';
-import { compose } from 'redux';
 
-import Spinner from 'components/Spinner';
+import Logo from 'components/Logo';
 import OnOffSwitch from './OnOffSwitch';
 import pack from '../../package.json'
 
@@ -35,42 +32,18 @@ class Header extends Component {
 
     return (
       <Wrapper>
-        {
-          isLoaded(fbStatus) ?
-            <div>
-              <Spinner isActive={fbStatus} />
-              <OnOffSwitch
-                isActive={fbStatus}
-                onStatusClick={this.hanldeToggleStats}
-                fbLastAction={fbLastAction}
-                mode={fbMode}
-                showNotification={showNotification}
-              />
-              <Version>version: {pack.version}</Version>
-            </div>
-            : null
-        }
+        <Logo isActive={fbStatus} />
+        <OnOffSwitch
+          isActive={fbStatus}
+          onStatusClick={this.hanldeToggleStats}
+          fbLastAction={fbLastAction}
+          mode={fbMode}
+          showNotification={showNotification}
+        />
+        <Version>version: {pack.version}</Version>
       </Wrapper>
     )
   }
 }
 
-
-function mapStateToProps(state) {
-  const fbStatusList = state.firestore.ordered.status;
-  const fbModeList = state.firestore.ordered.mode;
-
-  return {
-    fbStatus: fbStatusList && fbStatusList[0].value,
-    fbMode: fbModeList && fbModeList[0].value,
-    fbLastAction: fbStatusList && fbStatusList[0].createdAt
-  }
-}
-
-export default compose(
-  connect(mapStateToProps),
-  firestoreConnect([
-    { collection: 'status', limit: 4, orderBy: ['createdAt', 'desc'] },
-    { collection: 'mode', limit: 1, orderBy: ['createdAt', 'desc'] }
-  ])
-)(Header);
+export default Header;

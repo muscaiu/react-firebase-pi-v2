@@ -1,11 +1,5 @@
 import React, { Component } from 'react'
 import { Line } from "react-chartjs-2";
-import { connect } from 'react-redux';
-import {
-  firestoreConnect,
-  // isLoaded
-} from 'react-redux-firebase';
-import { compose } from 'redux';
 import moment from 'moment';
 
 import {
@@ -53,10 +47,7 @@ class LineChart extends Component {
     const lastWeek = daysArray.map(day => this.getTotalPerDay(day))
     const totalLastWeek = (lastWeek.reduce((acc, curr) => acc + curr) / 60).toFixed(1)
     
-    console.log(lastWeek)
-
     return (
-      // isLoaded(this.props.fbTotal) ? (
       <Card className="card-chart">
         <CardHeader>
           <h5 className="card-category">Total Hours last 7 days</h5>
@@ -105,21 +96,8 @@ class LineChart extends Component {
           </div>
         </CardBody>
       </Card>
-
-      // ) : <div>loading...</div>
     )
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    fbStatusList: state.firestore.ordered.status
-  }
-}
-
-export default compose(
-  connect(mapStateToProps),
-  firestoreConnect([
-    { collection: 'status', orderBy: ['createdAt', 'desc'] }
-  ])
-)(LineChart);
+export default LineChart;
