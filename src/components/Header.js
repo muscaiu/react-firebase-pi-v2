@@ -7,7 +7,6 @@ import { compose } from 'redux';
 import Spinner from 'components/Spinner';
 import OnOffSwitch from './OnOffSwitch';
 import pack from '../../package.json'
-import moment from 'moment';
 
 const Wrapper = styled.div`
   padding-top: 50px;
@@ -32,51 +31,9 @@ class Header extends Component {
     this.props.toggleStatus(this.props.fbStatus);
   }
 
-  getStatuses = () => {
-    const { fbAllStatuses } = this.props;
-    const trueValues = [];
-    if (fbAllStatuses) {
-      for (let i = 0; i < fbAllStatuses.length; i++) {
-        if (fbAllStatuses[i].value === true) {
-          var mom = moment(fbAllStatuses[i].createdAt, 'HHmmss');
-          const momFormated = mom.format('MMMM Do YYYY, h:mm:ss a');
-          trueValues.push(momFormated)
-          return momFormated
-        }
-      }
-    }
-    console.log(trueValues)
-  }
 
   render() {
-    const { fbStatus, fbMode, fbLastAction, fbTotal, showNotification, fbStatusList } = this.props;
-
-    const filteredList = fbStatusList && fbStatusList.reverse().reduce((total, currValue, index, array) => {
-      // const today = moment().format('DD-MM-YYYY hh:mm:ss')
-      const currCreated = currValue.createdAt
-      const count = total[currCreated] ? total[currCreated] + 1 : 1
-      console.log(total, index)
-      return {
-        ...total,
-        [moment(currCreated.toDate()).format('DD-MM-YYYY hh:mm:ss')]: count
-      }
-      // const calculateDiff = prevItem.diff(currItem, "seconds");
-
-      // console.log(moment(currValue.createdAt.toDate()).format('DD-MM-YYYY hh:mm:ss'), currIndex)
-    })
-    console.log(filteredList)
-
-    // const filteredList = fbStatusList && fbStatusList.reverse().map((item, index) => {
-    //   const today = moment().format('DD-MM-YYYY hh:mm:ss')
-    //   const selectedDay = moment(item.createdAt.toDate()).format('DD-MM-YYYY hh:mm:ss')
-
-    //   console.log(moment(item.createdAt.toDate()).format('DD-MM-YYYY hh:mm:ss'), item.value, index)
-    //   let i = 0;
-    //   let total = 0
-    //   if (index === i)
-
-    //     return item.createdat
-    // })
+    const { fbStatus, fbMode, fbLastAction, fbTotal, showNotification } = this.props;
 
     return (
       <Wrapper>
@@ -111,7 +68,6 @@ function mapStateToProps(state) {
     fbMode: fbModeList && fbModeList[0].value,
     fbLastAction: fbStatusList && fbStatusList[0].createdAt,
     fbTotal: state.firestore.ordered.total,
-    fbStatusList
   }
 }
 

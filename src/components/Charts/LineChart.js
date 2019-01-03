@@ -21,17 +21,39 @@ class LineChart extends Component {
 
   getDay = days => moment().subtract(days, 'day').format('dd')
 
-  getTotalPerDay = (days) => {
-    return this.props.fbTotal && this.props.fbTotal.find(val =>
-      val.createdAt && moment(val.createdAt.toDate()).isSame(moment().subtract(days, 'day'), 'day')
-    )
+  // getTotalPerDay = (days) => {
+  //   return this.props.fbTotal && this.props.fbTotal.find(val =>
+  //     val.createdAt && moment(val.createdAt.toDate()).isSame(moment().subtract(days, 'day'), 'day')
+  //   )
+  // }
+
+  getTotalPerDay = (day) => {
+    const { fbStatusList } = this.props;
+    const trueValues = [];
+    let prev;
+    const selectedDay = moment().subtract(day, 'day')
+
+    fbStatusList && fbStatusList.map(status => {
+      if (status.createdAt && moment(status.createdAt.toDate()).isSame(selectedDay, 'day')) {
+        if (status.value === false) {
+          prev = moment(status.createdAt.toDate(), "YYYYMMDD HH:mm:ss")
+        } else {
+          trueValues.push(prev && prev.diff(moment(status.createdAt.toDate()), "seconds"))
+        }
+      }
+    })
+    const total = trueValues.length > 0 && trueValues.reduce((acc, curr) => acc + curr)
+    return total ? Math.floor(total / 60) : 0
   }
 
   render() {
     const daysArray = [6, 5, 4, 3, 2, 1, 0]
     const labels = daysArray.map(day => this.getDay(day))
-    const lastWeek = daysArray.map(day => this.getTotalPerDay(day) ? Math.floor(this.getTotalPerDay(day).total / 60) : 0)
+    // const lastWeek = daysArray.map(day => this.getTotalPerDay(day) ? Math.floor(this.getTotalPerDay(day).total / 60) : 0)
+    const lastWeek = daysArray.map(day => this.getTotalPerDay(day))
     const totalLastWeek = (lastWeek.reduce((acc, curr) => acc + curr) / 60).toFixed(1)
+
+    console.log(lastWeek)
 
     return (
       // isLoaded(this.props.fbTotal) ? (
@@ -90,14 +112,17 @@ class LineChart extends Component {
 }
 
 function mapStateToProps(state) {
+  const fbStatusList = state.firestore.ordered.status;
   return {
-    fbTotal: state.firestore.ordered.total
+    fbTotal: state.firestore.ordered.total,
+    fbStatusList
   }
 }
 
 export default compose(
   connect(mapStateToProps),
   firestoreConnect([
+    { collection: 'status', orderBy: ['createdAt', 'desc'] },
     { collection: 'total', limit: 4, orderBy: ['createdAt', 'desc'] },
   ])
 )(LineChart);
