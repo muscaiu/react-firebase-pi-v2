@@ -34,8 +34,6 @@ class Modal extends Component {
     handleLogin = () => {
         const { password } = this.state;
         const {
-            fbLastAction,
-            fbTotal,
             isActive,
             showNotification,
             mode,
@@ -47,7 +45,7 @@ class Modal extends Component {
         }
         const notify = (message, position, type) => showNotification(position, type, message)
 
-        this.props.login(credentials, type === 'onoff' ? isActive : mode, fbLastAction, fbTotal, notify)
+        this.props.login(credentials, type === 'onoff' ? isActive : mode, notify)
         this.setState({ password: '' })
         this.handleClose();
     };

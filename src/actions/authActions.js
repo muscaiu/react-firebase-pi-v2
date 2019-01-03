@@ -1,17 +1,14 @@
-import moment from 'moment';
 
-export const login = (credentials, option, fbLastAction, fbTotal, notify) => {
+export const login = (credentials, option, notify) => {
   return (dispatch, getState, { getFirebase, getFirestore }) => {
 
     const firebase = getFirebase();
     const firestore = getFirestore();
-    console.log('login action');
 
     firebase.auth().signInWithEmailAndPassword(
       credentials.email,
       credentials.password
     ).then((res) => {
-      console.log('login sucess', option, typeof option);
 
       if (typeof option === "boolean") {
         firestore.collection('status').add({
@@ -20,28 +17,6 @@ export const login = (credentials, option, fbLastAction, fbTotal, notify) => {
         })
 
         if (option) {
-          const now = moment();
-          console.log('now', now);
-          const today = now.format('DD-MM-YYYY')
-          const selectFbTotal = fbTotal.find(val => val.id === today);
-          console.log('selectFbTotal', selectFbTotal);
-          const fbLast = moment(fbLastAction.toDate(), "YYYYMMDD HH:mm:ss");
-          const calculateDiff = now.diff(fbLast, "seconds");
-          console.log('seconds passed', calculateDiff);
-
-          if (!selectFbTotal) {
-            console.log('no prev data, doing set');
-            firestore.collection('total').doc(today).set({
-              total: calculateDiff,
-              createdAt: firestore.FieldValue.serverTimestamp()
-            })
-          } else {
-            console.log('found ' + selectFbTotal.total + " seconds in db");
-            firestore.collection('total').doc(today).update({
-              total: calculateDiff + selectFbTotal.total,
-              updatedAt: firestore.FieldValue.serverTimestamp()
-            })
-          }
           notify(`Success, Status OFF`, 'br', 'success')
         } else {
           notify(`Success, Status ON`, 'br', 'success')

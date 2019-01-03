@@ -39,7 +39,7 @@ class Notification extends React.Component {
             ),
             type,
             icon: "tim-icons icon-bell-55",
-            autoDismiss: 3
+            autoDismiss: 7
         };
         this.refs.notificationAlert.notificationAlert(options);
     };

@@ -23,7 +23,6 @@ const Version = styled.div`
 class Header extends Component {
 
   hanldeToggleMode = () => {
-    console.log('hanldeToggleMode');
     this.props.toggleMode(this.props.fbMode);
   }
 
@@ -31,9 +30,8 @@ class Header extends Component {
     this.props.toggleStatus(this.props.fbStatus);
   }
 
-
   render() {
-    const { fbStatus, fbMode, fbLastAction, fbTotal, showNotification } = this.props;
+    const { fbStatus, fbMode, fbLastAction, showNotification } = this.props;
 
     return (
       <Wrapper>
@@ -45,7 +43,6 @@ class Header extends Component {
                 isActive={fbStatus}
                 onStatusClick={this.hanldeToggleStats}
                 fbLastAction={fbLastAction}
-                fbTotal={fbTotal}
                 mode={fbMode}
                 showNotification={showNotification}
               />
@@ -66,8 +63,7 @@ function mapStateToProps(state) {
   return {
     fbStatus: fbStatusList && fbStatusList[0].value,
     fbMode: fbModeList && fbModeList[0].value,
-    fbLastAction: fbStatusList && fbStatusList[0].createdAt,
-    fbTotal: state.firestore.ordered.total,
+    fbLastAction: fbStatusList && fbStatusList[0].createdAt
   }
 }
 
@@ -75,7 +71,6 @@ export default compose(
   connect(mapStateToProps),
   firestoreConnect([
     { collection: 'status', limit: 4, orderBy: ['createdAt', 'desc'] },
-    { collection: 'mode', limit: 1, orderBy: ['createdAt', 'desc'] },
-    { collection: 'total' }
+    { collection: 'mode', limit: 1, orderBy: ['createdAt', 'desc'] }
   ])
 )(Header);

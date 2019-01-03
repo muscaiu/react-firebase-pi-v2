@@ -45,9 +45,8 @@ class OnOffSwitch extends Component {
     const {
       isActive,
       mode,
-      fbLastAction,
-      fbTotal,
-      showNotification
+      showNotification,
+      fbLastAction
       // isEnabled
     } = this.props;
     const { showModal, dialogType } = this.state;
@@ -92,7 +91,6 @@ class OnOffSwitch extends Component {
           onClose={() => this.handleToggleModal(false)}
           showNotification={showNotification}
           fbLastAction={fbLastAction}
-          fbTotal={fbTotal}
           isActive={isActive}
           mode={mode}
         />

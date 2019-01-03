@@ -52,7 +52,7 @@ class LineChart extends Component {
     // const lastWeek = daysArray.map(day => this.getTotalPerDay(day) ? Math.floor(this.getTotalPerDay(day).total / 60) : 0)
     const lastWeek = daysArray.map(day => this.getTotalPerDay(day))
     const totalLastWeek = (lastWeek.reduce((acc, curr) => acc + curr) / 60).toFixed(1)
-
+    
     console.log(lastWeek)
 
     return (
@@ -112,17 +112,14 @@ class LineChart extends Component {
 }
 
 function mapStateToProps(state) {
-  const fbStatusList = state.firestore.ordered.status;
   return {
-    fbTotal: state.firestore.ordered.total,
-    fbStatusList
+    fbStatusList: state.firestore.ordered.status
   }
 }
 
 export default compose(
   connect(mapStateToProps),
   firestoreConnect([
-    { collection: 'status', orderBy: ['createdAt', 'desc'] },
-    { collection: 'total', limit: 4, orderBy: ['createdAt', 'desc'] },
+    { collection: 'status', orderBy: ['createdAt', 'desc'] }
   ])
 )(LineChart);
