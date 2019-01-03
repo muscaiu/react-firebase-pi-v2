@@ -17,9 +17,9 @@ export const login = (credentials, option, notify) => {
         })
 
         if (option) {
-          notify(`Success, Status OFF`, 'br', 'success')
+          notify(`Success, Status OFF`, 'bc', 'success')
         } else {
-          notify(`Success, Status ON`, 'br', 'success')
+          notify(`Success, Status ON`, 'bc', 'success')
         }
       }
 
@@ -28,11 +28,11 @@ export const login = (credentials, option, notify) => {
           value: option === 'manual' ? 'auto' : 'manual',
           createdAt: firestore.FieldValue.serverTimestamp(),
         })
-        notify(`Success, Mode ${option === 'manual' ? 'Auto' : 'Manual'}`, 'br', 'success')
+        notify(`Success, Mode ${option === 'manual' ? 'Auto' : 'Manual'}`, 'bc', 'success')
       }
     }).catch((err) => {
       console.log('login error', err);
-      notify(`Wrong password!`, 'br', 'danger')
+      notify(`Wrong password!`, 'bc', 'danger')
     })
   }
 }

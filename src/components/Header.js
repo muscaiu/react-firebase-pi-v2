@@ -32,7 +32,10 @@ class Header extends Component {
 
     return (
       <Wrapper>
-        <Logo isActive={fbStatus} />
+        <Logo
+          isActive={fbStatus}
+          showNotification={showNotification}
+        />
         <OnOffSwitch
           isActive={fbStatus}
           onStatusClick={this.hanldeToggleStats}

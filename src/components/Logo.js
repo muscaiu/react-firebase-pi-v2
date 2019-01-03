@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import styled, { keyframes } from 'styled-components';
 import axios from 'axios';
 
@@ -22,25 +22,33 @@ const LogoImg = styled.img`
   height: 150px;
 `;
 
-const handleTestClick = () => {
-  axios.get('http://cassusa.go.ro:3001/api/test')
-    .then(function (response) {
-      console.log(response.data.relayStatus)
-      alert('Real status: ' + response.data.relayStatus);
-    })
-    .catch(function (err) {
-      alert(err);
-    })
-}
+class Logo extends Component {
+  handleTestClick = () => {
+    const { showNotification } = this.props;
+    const notify = (message, position, type) => showNotification(position, type, message)
 
-const Logo = ({ isActive }) => (
-  <Wrapper>
-    <LogoImg
-      onClick={handleTestClick}
-      isActive={isActive}
-      src={logo}
-    />
-  </Wrapper>
-)
+    axios.get('http://cassusa.go.ro:3001/api/test')
+      .then(function (response) {
+        notify(`Real status: ${response.data.relayStatus}`, 'bc', 'success')
+      })
+      .catch(function (err) {
+        alert();
+        notify(`${err}`, 'bc', 'danger')
+      })
+  }
+
+  render() {
+    const { isActive } = this.props;
+    return (
+      <Wrapper>
+        <LogoImg
+          onClick={this.handleTestClick}
+          isActive={isActive}
+          src={logo}
+        />
+      </Wrapper>
+    )
+  }
+}
 
 export default Logo;

@@ -45,16 +45,10 @@ class Dashboard extends React.Component {
       ),
       type,
       icon: "tim-icons icon-bell-55",
-      autoDismiss: 3
+      autoDismiss: 5
     };
     this.refs.notificationAlert.notificationAlert(options);
   };
-
-  isLoad = () => {
-    setTimeout(() => {
-      console.log('dickhead')
-    }, 5000)
-  }
 
   render() {
     const { fbStatus, fbMode, fbLastAction, fbStatusList } = this.props;
