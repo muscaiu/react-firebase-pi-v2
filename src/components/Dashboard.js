@@ -6,17 +6,15 @@ import { compose } from 'redux';
 import NotificationAlert from "react-notification-alert";
 import {
   Card,
-  // CardHeader,
   CardBody,
   CardTitle,
   Row,
   Col,
 } from "reactstrap";
 
-import Header from 'components/Header';
-import LineChart from 'components/Charts/LineChart';
-// import MultiChart from 'components/Charts/MultiChart';
-import Spinner from 'components/Spinner';
+import Header from 'components/Header/Header';
+import Spinner from 'components/Header/Spinner';
+import MultiChart from 'components/Charts/MultiChart';
 
 class Dashboard extends React.Component {
   constructor(props) {
@@ -69,7 +67,7 @@ class Dashboard extends React.Component {
                               fbStatus={fbStatus}
                               fbMode={fbMode}
                               fbLastAction={fbLastAction}
-                              showNotification={this.showNotification} 
+                              showNotification={this.showNotification}
                             />
                           </CardTitle>
                         </Col>
@@ -81,33 +79,9 @@ class Dashboard extends React.Component {
             </Row>
             <Row>
               <Col xs="12">
-                <LineChart fbStatusList={fbStatusList} />
+                <MultiChart fbStatusList={fbStatusList} />
               </Col>
             </Row>
-            {/* <Row>
-            <Col lg="4">
-              <MultiChart />
-            </Col>
-            <Col lg="4">
-              <BarChart />
-            </Col>
-            <Col lg="4">
-              <PieChart />
-            </Col>
-          </Row>
-          <Row>
-            <Col lg="6" md="12">
-              <TableEditable />
-            </Col>
-            <Col lg="6" md="12">
-              <TableSimple />
-            </Col>
-          </Row> */}
-            {/* <Row>
-            <Col xs="12">
-              <Notifications />
-            </Col>
-          </Row> */}
           </div>
           <NotificationAlert ref="notificationAlert" />
         </Fragment> :
@@ -115,7 +89,6 @@ class Dashboard extends React.Component {
     );
   }
 }
-
 
 function mapStateToProps(state) {
   const fbStatusList = state.firestore.ordered.status;

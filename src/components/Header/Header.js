@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 
-import Logo from 'components/Logo';
-import OnOffSwitch from './OnOffSwitch';
-import pack from '../../package.json'
+import Logo from 'components/Header/Logo';
+import OnOffSwitch from 'components/Header/OnOffSwitch';
+import pack from '../../../package.json'
 
 const Wrapper = styled.div`
   padding-top: 10px;

@@ -57,7 +57,7 @@ let chart1_2_options = {
 // // // used inside src/views/Dashboard.jsx
 // #########################################
 let chartExample1 = {
-  data1: canvas => {
+  week: canvas => {
     let ctx = canvas.getContext("2d");
 
     let gradientStroke = ctx.createLinearGradient(0, 230, 0, 50);
@@ -102,7 +102,7 @@ let chartExample1 = {
       ]
     };
   },
-  data2: canvas => {
+  month: canvas => {
     let ctx = canvas.getContext("2d");
 
     let gradientStroke = ctx.createLinearGradient(0, 230, 0, 50);
@@ -137,7 +137,7 @@ let chartExample1 = {
       ]
     };
   },
-  data3: canvas => {
+  year: canvas => {
     let ctx = canvas.getContext("2d");
 
     let gradientStroke = ctx.createLinearGradient(0, 230, 0, 50);

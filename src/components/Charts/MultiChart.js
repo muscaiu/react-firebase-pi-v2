@@ -1,11 +1,5 @@
 import React, { Component } from 'react'
 import { Line } from "react-chartjs-2";
-import { connect } from 'react-redux';
-import {
-    firestoreConnect,
-    // isLoaded
-} from 'react-redux-firebase';
-import { compose } from 'redux';
 import classNames from "classnames";
 import moment from 'moment';
 
@@ -25,35 +19,83 @@ import {
     chartExample1,
 } from "variables/charts";
 
-class LineChart extends Component {
+class MultiChart extends Component {
     state = {
-        bigChartData: "data1"
+        chartOption: "week"
     };
 
-    setBgChartData = name => {
+    setChartOption = name => {
         this.setState({
-            bigChartData: name
+            chartOption: name
         });
     };
 
     getDay = days => moment().subtract(days, 'day').format('dd')
+    getDayOfMonth = days => moment().subtract(days, 'day').format('DD')
+    getMonth = month => moment().subtract(month, 'month').format('MMM')
 
-    getTotal = (days) => {
-        console.log(this.props.fbTotal);
-        return this.props.fbTotal && this.props.fbTotal.find(val =>
-            moment(val.createdAt.toDate()).isSame(moment().subtract(days, 'day'), 'day')
-        )
+    getDailyTotal = (day) => {
+        const { fbStatusList } = this.props;
+        const trueValues = [];
+        let prev;
+        const selectedDay = moment().subtract(day, 'day')
+
+        fbStatusList && fbStatusList.map(status => {
+            if (status.createdAt && moment(status.createdAt.toDate()).isSame(selectedDay, 'day')) {
+                if (status.value === false) {
+                    prev = moment(status.createdAt.toDate(), "YYYYMMDD HH:mm:ss")
+                } else {
+                    trueValues.push(prev && prev.diff(moment(status.createdAt.toDate()), "seconds"))
+                }
+            }
+        })
+        const total = trueValues.length > 0 && trueValues.reduce((acc, curr) => acc + curr)
+        return total ? Math.floor(total / 60) : 0
     }
 
+    // getMonthlyTotal = (month) => {
+    //     const { fbStatusList } = this.props;
+    //     const trueValues = [];
+    //     let prev;
+    //     const selectedMonth = moment().subtract(month, 'month')
+
+    //     fbStatusList && fbStatusList.map(status => {
+    //         if (status.createdAt && moment(status.createdAt.toDate()).isSame(selectedMonth, 'month')) {
+    //             if (status.value === false) {
+    //                 prev = moment(status.createdAt.toDate(), "YYYYMMDD HH:mm:ss")
+    //             } else {
+    //                 trueValues.push(prev && prev.diff(moment(status.createdAt.toDate()), "seconds"))
+    //             }
+    //         }
+    //     })
+    //     const total = trueValues.length > 0 && trueValues.reduce((acc, curr) => acc + curr)
+    //     return total ? Math.floor(total / 60) : 0
+    // }
+
     render() {
+        const { chartOption } = this.state;
+        const daysArray = [6, 5, 4, 3, 2, 1, 0]
+        const monthArray = [...Array(30).keys()]
+        // const yearArray = [...Array(12).keys()]
+        const dayLabels = daysArray.map(day => this.getDay(day))
+        const monthLabels = monthArray.reverse().map(day => this.getDayOfMonth(day))
+        // const yearLabels = yearArray.reverse().map(month => this.getMonth(month))
+        const lastWeek = daysArray.map(day => this.getDailyTotal(day))
+        const lastMonth = monthArray.map(day => this.getDailyTotal(day))
+        // const lastYear = monthArray.map(month => this.getMonthlyTotal(month))
+        const totalLastWeek = (lastWeek.reduce((acc, curr) => acc + curr) / 60).toFixed(1)
+        const totalLastMonth = (lastMonth.reduce((acc, curr) => acc + curr) / 60).toFixed(1)
+
         return (
-            // isLoaded(this.props.fbTotal) ? (
             <Card className="card-chart">
                 <CardHeader>
                     <Row>
                         <Col className="text-left" sm="6">
-                            <h5 className="card-category">Total Shipments</h5>
-                            <CardTitle tag="h2">Performance</CardTitle>
+                            <h5 className="card-category">{`Total Hours last ${chartOption}`}</h5>
+                            <CardTitle tag="h3">
+                                <i className="tim-icons icon-bell-55 text-info" />{" "}
+                                {chartOption === 'month' ? totalLastMonth : totalLastWeek}
+                            </CardTitle>
                         </Col>
                         <Col sm="6">
                             <ButtonGroup
@@ -63,25 +105,25 @@ class LineChart extends Component {
                                 <Button
                                     tag="label"
                                     className={classNames("btn-simple", {
-                                        active: this.state.bigChartData === "data1"
+                                        active: chartOption === "week"
                                     })}
                                     color="info"
                                     id="0"
                                     size="sm"
-                                    onClick={() => this.setBgChartData("data1")}
+                                    onClick={() => this.setChartOption("week")}
                                 >
-                                    <input
+                                    {/* <input
                                         defaultChecked
                                         className="d-none"
                                         name="options"
                                         type="radio"
-                                    />
-                                    <span className="d-none d-sm-block d-md-block d-lg-block d-xl-block">
-                                        Accounts
+                                    /> */}
+                                    <span className="d-sm-block d-md-block d-lg-block d-xl-block">
+                                        Week
                                     </span>
-                                    <span className="d-block d-sm-none">
+                                    {/* <span className="d-block d-sm-none">
                                         <i className="tim-icons icon-single-02" />
-                                    </span>
+                                    </span> */}
                                 </Button>
                                 <Button
                                     color="info"
@@ -89,44 +131,44 @@ class LineChart extends Component {
                                     size="sm"
                                     tag="label"
                                     className={classNames("btn-simple", {
-                                        active: this.state.bigChartData === "data2"
+                                        active: chartOption === "month"
                                     })}
-                                    onClick={() => this.setBgChartData("data2")}
+                                    onClick={() => this.setChartOption("month")}
                                 >
-                                    <input
+                                    {/* <input
                                         className="d-none"
                                         name="options"
                                         type="radio"
-                                    />
-                                    <span className="d-none d-sm-block d-md-block d-lg-block d-xl-block">
-                                        Purchases
+                                    /> */}
+                                    <span className="d-sm-block d-md-block d-lg-block d-xl-block">
+                                        Month
                                     </span>
-                                    <span className="d-block d-sm-none">
+                                    {/* <span className="d-block d-sm-none">
                                         <i className="tim-icons icon-gift-2" />
-                                    </span>
+                                    </span> */}
                                 </Button>
-                                <Button
+                                {/* <Button
                                     color="info"
                                     id="2"
                                     size="sm"
                                     tag="label"
                                     className={classNames("btn-simple", {
-                                        active: this.state.bigChartData === "data3"
+                                        active: chartOption === "year"
                                     })}
-                                    onClick={() => this.setBgChartData("data3")}
+                                    onClick={() => this.setChartOption("year")}
                                 >
                                     <input
                                         className="d-none"
                                         name="options"
                                         type="radio"
                                     />
-                                    <span className="d-none d-sm-block d-md-block d-lg-block d-xl-block">
-                                        Sessions
+                                    <span className="d-sm-block d-md-block d-lg-block d-xl-block">
+                                        Year
                                     </span>
                                     <span className="d-block d-sm-none">
                                         <i className="tim-icons icon-tap-02" />
                                     </span>
-                                </Button>
+                                </Button> */}
                             </ButtonGroup>
                         </Col>
                     </Row>
@@ -134,30 +176,48 @@ class LineChart extends Component {
                 <CardBody>
                     <div className="chart-area">
                         <Line
-                            data={chartExample1[this.state.bigChartData]}
+                            data={
+                                canvas => {
+                                    let ctx = canvas.getContext("2d");
+                                    let gradientStroke = ctx.createLinearGradient(0, 230, 0, 50);
+                                    gradientStroke.addColorStop(1, "rgba(29,140,248,0.2)");
+                                    gradientStroke.addColorStop(0.4, "rgba(29,140,248,0.0)");
+                                    gradientStroke.addColorStop(0, "rgba(29,140,248,0)"); //blue colors
+
+                                    return {
+                                        labels: chartOption === 'month' ? monthLabels : dayLabels,
+                                        datasets: [
+                                            {
+                                                label: "minutes",
+                                                fill: true,
+                                                backgroundColor: gradientStroke,
+                                                borderColor: "#1f8ef1",
+                                                borderWidth: 2,
+                                                borderDash: [],
+                                                borderDashOffset: 0.0,
+                                                pointBackgroundColor: "#1f8ef1",
+                                                pointBorderColor: "rgba(255,255,255,0)",
+                                                pointHoverBackgroundColor: "#1f8ef1",
+                                                pointBorderWidth: 20,
+                                                pointHoverRadius: 4,
+                                                pointHoverBorderWidth: 15,
+                                                pointRadius: 4,
+                                                data: chartOption === 'month' ? lastMonth : lastWeek
+                                            }
+                                        ]
+                                    };
+                                }
+                            }
                             options={chartExample1.options}
                         />
                     </div>
                 </CardBody>
             </Card>
-
-            // ) : <div>loading...</div>
         )
     }
 }
 
-function mapStateToProps(state) {
-    return {
-        fbTotal: state.firestore.ordered.total
-    }
-}
-
-export default compose(
-    connect(mapStateToProps),
-    firestoreConnect([
-        { collection: 'total', limit: 4, orderBy: ['createdAt', 'desc'] },
-    ])
-)(LineChart);
+export default MultiChart;
 
 
 

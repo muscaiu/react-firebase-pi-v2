@@ -1,4 +1,4 @@
-import Dashboard from "views/Dashboard";
+import Dashboard from "components/Dashboard";
 // import Notifications from "views/Notifications";
 // import UserProfile from "views/UserProfile.jsx";
 
