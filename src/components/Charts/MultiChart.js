@@ -15,9 +15,7 @@ import {
 } from "reactstrap";
 
 // core components
-import {
-    chartExample1,
-} from "variables/charts";
+import { chartExample1 } from "variables/charts";
 
 class MultiChart extends Component {
     state = {
@@ -112,18 +110,9 @@ class MultiChart extends Component {
                                     size="sm"
                                     onClick={() => this.setChartOption("week")}
                                 >
-                                    {/* <input
-                                        defaultChecked
-                                        className="d-none"
-                                        name="options"
-                                        type="radio"
-                                    /> */}
                                     <span className="d-sm-block d-md-block d-lg-block d-xl-block">
                                         Week
                                     </span>
-                                    {/* <span className="d-block d-sm-none">
-                                        <i className="tim-icons icon-single-02" />
-                                    </span> */}
                                 </Button>
                                 <Button
                                     color="info"
@@ -135,17 +124,9 @@ class MultiChart extends Component {
                                     })}
                                     onClick={() => this.setChartOption("month")}
                                 >
-                                    {/* <input
-                                        className="d-none"
-                                        name="options"
-                                        type="radio"
-                                    /> */}
                                     <span className="d-sm-block d-md-block d-lg-block d-xl-block">
                                         Month
                                     </span>
-                                    {/* <span className="d-block d-sm-none">
-                                        <i className="tim-icons icon-gift-2" />
-                                    </span> */}
                                 </Button>
                                 {/* <Button
                                     color="info"

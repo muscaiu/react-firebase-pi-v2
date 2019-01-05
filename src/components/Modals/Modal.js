@@ -43,9 +43,7 @@ class Modal extends Component {
             email: 'admin@yahoo.com',
             password
         }
-        const notify = (message, position, type) => showNotification(position, type, message)
-
-        this.props.login(credentials, type === 'onoff' ? isActive : mode, notify)
+        this.props.login(credentials, type === 'onoff' ? isActive : mode, showNotification)
         this.setState({ password: '' })
         this.handleClose();
     };

@@ -27,17 +27,9 @@ class Dashboard extends React.Component {
   };
   showNotification = (place, type, message) => {
     // primary, success, dandger, warning, info
-
-    var options = {};
-    options = {
+    const options = {
       place,
-      message: (
-        <div>
-          <div>
-            {message}
-          </div>
-        </div>
-      ),
+      message: (<div>{message}</div>),
       type,
       icon: "tim-icons icon-bell-55",
       autoDismiss: 5

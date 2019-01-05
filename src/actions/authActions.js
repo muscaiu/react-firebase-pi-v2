@@ -1,5 +1,5 @@
 
-export const login = (credentials, option, notify) => {
+export const login = (credentials, option, showNotification) => {
   return (dispatch, getState, { getFirebase, getFirestore }) => {
 
     const firebase = getFirebase();
@@ -17,9 +17,9 @@ export const login = (credentials, option, notify) => {
         })
 
         if (option) {
-          notify(`Success, Status OFF`, 'bc', 'success')
+          showNotification('bc', 'success', 'Success, Status OFF')
         } else {
-          notify(`Success, Status ON`, 'bc', 'success')
+          showNotification('bc', 'success', 'Success, Status ON')
         }
       }
 
@@ -28,11 +28,11 @@ export const login = (credentials, option, notify) => {
           value: option === 'manual' ? 'auto' : 'manual',
           createdAt: firestore.FieldValue.serverTimestamp(),
         })
-        notify(`Success, Mode ${option === 'manual' ? 'Auto' : 'Manual'}`, 'bc', 'success')
+        showNotification('bc', 'success', `Success, Mode ${option === 'manual' ? 'Auto' : 'Manual'}`)
       }
     }).catch((err) => {
       console.log('login error', err);
-      notify(`Wrong password!`, 'bc', 'danger')
+      showNotification('bc', 'danger', `Wrong password!`)
     })
   }
 }

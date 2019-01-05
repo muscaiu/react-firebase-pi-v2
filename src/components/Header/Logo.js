@@ -25,15 +25,14 @@ const LogoImg = styled.img`
 class Logo extends Component {
   handleTestClick = () => {
     const { showNotification } = this.props;
-    const notify = (message, position, type) => showNotification(position, type, message)
 
     axios.get('http://cassusa.go.ro:3001/api/test')
       .then(function (response) {
-        notify(`Real status: ${response.data.relayStatus}`, 'bc', 'success')
+        showNotification('bc', 'success', `Real status: ${response.data.relayStatus}`)
       })
       .catch(function (err) {
         alert();
-        notify(`${err}`, 'bc', 'danger')
+        showNotification('bc', 'danger', `${err}`)
       })
   }
 

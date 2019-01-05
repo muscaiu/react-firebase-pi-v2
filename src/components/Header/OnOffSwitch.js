@@ -28,6 +28,13 @@ class OnOffSwitch extends Component {
     );
   }
 
+  handleNotifyDisabled = () => {
+    const { showNotification, mode } = this.props;
+    if (mode === 'auto') {
+      showNotification('bc', 'warning', 'Disabled in Auto Mode')
+    }
+  }
+
   render() {
     const {
       isActive,
@@ -50,7 +57,8 @@ class OnOffSwitch extends Component {
           />
           <OnOff color={mode === 'auto' ? '#7AC943' : '#BDBDBD'}>Auto</OnOff>
         </SwitchWrapper>*/}
-        <SwitchWrapper>
+        <SwitchWrapper
+          onClick={this.handleNotifyDisabled}>
           <OnOff color={isActive ? '#BDBDBD' : '#7AC943'}>Off</OnOff>
           <Switch
             disabled={mode === 'auto'}
