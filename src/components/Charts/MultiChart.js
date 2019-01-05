@@ -38,7 +38,7 @@ class MultiChart extends Component {
         let prev;
         const selectedDay = moment().subtract(day, 'day')
 
-        fbStatusList && fbStatusList.map(status => {
+        fbStatusList && fbStatusList.forEach(status => {
             if (status.createdAt && moment(status.createdAt.toDate()).isSame(selectedDay, 'day')) {
                 if (status.value === false) {
                     prev = moment(status.createdAt.toDate(), "YYYYMMDD HH:mm:ss")
@@ -46,7 +46,8 @@ class MultiChart extends Component {
                     trueValues.push(prev && prev.diff(moment(status.createdAt.toDate()), "seconds"))
                 }
             }
-        })
+        });
+
         const total = trueValues.length > 0 && trueValues.reduce((acc, curr) => acc + curr)
         return total ? Math.floor(total / 60) : 0
     }
