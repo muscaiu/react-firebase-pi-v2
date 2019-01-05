@@ -1,26 +1,15 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import moment from 'moment';
 
 import Switch from '@material-ui/core/Switch';
 
-import Modal from 'components/Modal/Modal';
+import Modal from 'components/Modals/Modal';
 
 const OnOff = styled.span`
   ${props => `color: ${props.color}`};
 `;
 const SwitchWrapper = styled.div`
   text-align: center;
-  padding-bottom: 10px;
-`;
-const LogWrapper = styled.div`
-`;
-const Distance = styled.div`
-  color: #7AC943;
-`;
-const AutoModeLog = styled.div`
-  font-size: 13px;
-  color: #BDBDBD;
 `;
 
 class OnOffSwitch extends Component {
@@ -29,8 +18,6 @@ class OnOffSwitch extends Component {
     showModal: false,
     dialogType: ''
   }
-
-  getDistance = () => this.props.fbLastAction && moment(this.props.fbLastAction.toDate()).from();
 
   handleToggleModal = (toggle, title) => {
     this.setState(
@@ -47,12 +34,12 @@ class OnOffSwitch extends Component {
       mode,
       showNotification,
       fbLastAction
-      // isEnabled
     } = this.props;
     const { showModal, dialogType } = this.state;
 
     return (
       <div>
+        {/* 
         <SwitchWrapper>
           <OnOff color={mode === 'manual' ? '#7AC943' : '#BDBDBD'}>Manual</OnOff>
           <Switch
@@ -62,8 +49,7 @@ class OnOffSwitch extends Component {
             color="primary"
           />
           <OnOff color={mode === 'auto' ? '#7AC943' : '#BDBDBD'}>Auto</OnOff>
-        </SwitchWrapper>
-
+        </SwitchWrapper>*/}
         <SwitchWrapper>
           <OnOff color={isActive ? '#BDBDBD' : '#7AC943'}>Off</OnOff>
           <Switch
@@ -75,15 +61,6 @@ class OnOffSwitch extends Component {
           />
           <OnOff color={isActive ? '#7AC943' : '#BDBDBD'}>On</OnOff>
         </SwitchWrapper>
-
-        <LogWrapper>
-          <Distance>
-            {isActive ? 'ON' : 'OFF'} since: {this.getDistance()}
-          </Distance>
-          <AutoModeLog>
-            Auto interval : 19:00 - 20:00
-          </AutoModeLog>
-        </LogWrapper>
 
         <Modal
           type={dialogType}

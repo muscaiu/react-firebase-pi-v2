@@ -93,7 +93,7 @@ class MultiChart extends Component {
                         <Col className="text-left" sm="6">
                             <h5 className="card-category">{`Total Hours last ${chartOption}`}</h5>
                             <CardTitle tag="h3">
-                                <i className="tim-icons icon-bell-55 text-info" />{" "}
+                                <i className="tim-icons icon-chart-pie-36 text-info" />{" "}
                                 {chartOption === 'month' ? totalLastMonth : totalLastWeek}
                             </CardTitle>
                         </Col>

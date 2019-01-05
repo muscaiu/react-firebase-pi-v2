@@ -5,9 +5,6 @@ import { compose } from 'redux';
 
 import NotificationAlert from "react-notification-alert";
 import {
-  Card,
-  CardBody,
-  CardTitle,
   Row,
   Col,
 } from "reactstrap";
@@ -56,25 +53,13 @@ class Dashboard extends React.Component {
         <Fragment>
           <div className="content">
             <Row>
-              <Col md="12">
-                <Card>
-                  <CardBody>
-                    <div className="places-buttons">
-                      <Row>
-                        <Col className="ml-auto mr-auto text-center" md="6">
-                          <CardTitle tag="h4">
-                            <Header
-                              fbStatus={fbStatus}
-                              fbMode={fbMode}
-                              fbLastAction={fbLastAction}
-                              showNotification={this.showNotification}
-                            />
-                          </CardTitle>
-                        </Col>
-                      </Row>
-                    </div>
-                  </CardBody>
-                </Card>
+              <Col xs="12">
+                <Header
+                  fbStatus={fbStatus}
+                  fbMode={fbMode}
+                  fbLastAction={fbLastAction}
+                  showNotification={this.showNotification}
+                />
               </Col>
             </Row>
             <Row>
