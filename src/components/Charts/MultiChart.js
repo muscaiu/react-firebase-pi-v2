@@ -38,12 +38,16 @@ class MultiChart extends Component {
         let prev;
         const selectedDay = moment().subtract(day, 'day')
 
-        fbStatusList && fbStatusList.forEach(status => {
+        fbStatusList && fbStatusList.forEach((status, index) => {
             if (status.createdAt && moment(status.createdAt.toDate()).isSame(selectedDay, 'day')) {
                 if (status.value === false) {
                     prev = moment(status.createdAt.toDate(), "YYYYMMDD HH:mm:ss")
                 } else {
-                    trueValues.push(prev && prev.diff(moment(status.createdAt.toDate()), "seconds"))
+                    if (index === 0) {
+                        trueValues.push(moment().diff(moment(status.createdAt.toDate()), "seconds"))
+                    } else {
+                        trueValues.push(prev && prev.diff(moment(status.createdAt.toDate()), "seconds"))
+                    }
                 }
             }
         });
@@ -72,6 +76,7 @@ class MultiChart extends Component {
     // }
 
     render() {
+        console.log(this.props.fbStatusList.length)
         const { chartOption } = this.state;
         const daysArray = [6, 5, 4, 3, 2, 1, 0]
         const monthArray = [...Array(30).keys()]
