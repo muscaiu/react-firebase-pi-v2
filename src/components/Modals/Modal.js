@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import TextField from '@material-ui/core/TextField';
@@ -10,14 +11,17 @@ import { Button } from "reactstrap";
 import * as authActions from 'actions/authActions';
 
 class Modal extends Component {
-    constructor(props) {
-        super(props);
-        const { show } = props;
-        this.state = {
-            open: show,
-            password: ''
-        };
-    }
+    static propTypes = {
+        isActive: PropTypes.bool.isRequired,
+        show: PropTypes.bool.isRequired,
+        mode: PropTypes.string,
+        showNotification: PropTypes.func.isRequired
+    };
+
+    state = {
+        open: this.props.show,
+        password: ''
+    };
 
     componentWillReceiveProps(nextProps) {
         this.setState({ open: nextProps.show });

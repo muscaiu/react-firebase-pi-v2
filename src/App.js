@@ -1,5 +1,5 @@
 import React from 'react';
-import styled, { injectGlobal } from 'styled-components';
+import { injectGlobal } from 'styled-components';
 
 import Header from 'components/Header';
 
@@ -13,14 +13,9 @@ injectGlobal`
     background-color: #222;
   }
 `
-const Wrapper = styled.div`
-  text-align: center;
-`;
 
 const App = () => (
-  < Wrapper >
-    <Header />
-  </Wrapper >
+  <Header />
 );
 
 export default App;

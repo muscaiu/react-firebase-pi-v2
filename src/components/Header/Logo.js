@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import styled, { keyframes } from 'styled-components';
 import axios from 'axios';
 
 import logo from "assets/img/logo.svg";
-
-const Wrapper = styled.div`
-`;
 
 const rotate360 = keyframes`
   from {
@@ -23,6 +21,11 @@ const LogoImg = styled.img`
 `;
 
 class Logo extends Component {
+  static propTypes = {
+    isActive: PropTypes.bool.isRequired,
+    showNotification: PropTypes.func.isRequired
+  };
+
   handleTestClick = () => {
     const { showNotification } = this.props;
 
@@ -31,7 +34,6 @@ class Logo extends Component {
         showNotification('bc', 'success', `Real status: ${response.data.relayStatus}`)
       })
       .catch(function (err) {
-        alert();
         showNotification('bc', 'danger', `${err}`)
       })
   }
@@ -39,13 +41,11 @@ class Logo extends Component {
   render() {
     const { isActive } = this.props;
     return (
-      <Wrapper>
-        <LogoImg
-          onClick={this.handleTestClick}
-          isActive={isActive}
-          src={logo}
-        />
-      </Wrapper>
+      <LogoImg
+        onClick={this.handleTestClick}
+        isActive={isActive}
+        src={logo}
+      />
     )
   }
 }

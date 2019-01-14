@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import moment from 'moment';
 import classNames from "classnames";
@@ -32,6 +33,12 @@ const Distance = styled.div`
 `;
 
 class Header extends Component {
+  static proptypes = {
+    fbStatus: PropTypes.bool.isRequired,
+    fbMode: PropTypes.string.isRequired,
+    showNotification: PropTypes.func.isRequired
+  }
+
   state = {
     showModal: false,
     dialogType: ''
@@ -49,8 +56,9 @@ class Header extends Component {
   getDistance = () => this.props.fbLastAction && moment(this.props.fbLastAction.toDate()).from();
 
   render() {
-    const { fbStatus, fbMode, fbLastAction, showNotification } = this.props;
+    const { fbStatus, fbMode, showNotification } = this.props;
     const { showModal, dialogType } = this.state;
+
     return (
       <Fragment>
         <Card className="card-chart">
@@ -111,7 +119,6 @@ class Header extends Component {
                   <OnOffSwitch
                     isActive={fbStatus}
                     onStatusClick={this.hanldeToggleStats}
-                    fbLastAction={fbLastAction}
                     mode={fbMode}
                     showNotification={showNotification}
                   />
@@ -129,7 +136,6 @@ class Header extends Component {
           show={showModal}
           onClose={() => this.handleToggleModal(false)}
           showNotification={showNotification}
-          fbLastAction={fbLastAction}
           isActive={fbStatus}
           mode={fbMode}
         />

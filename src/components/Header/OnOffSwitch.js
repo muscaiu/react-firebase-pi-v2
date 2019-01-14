@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
-
 import Switch from '@material-ui/core/Switch';
 
 import Modal from 'components/Modals/Modal';
@@ -13,6 +13,11 @@ const SwitchWrapper = styled.div`
 `;
 
 class OnOffSwitch extends Component {
+  static propTypes = {
+    isActive: PropTypes.bool.isRequired,
+    mode: PropTypes.string,
+    showNotification: PropTypes.func.isRequired
+  };
 
   state = {
     showModal: false,
@@ -36,27 +41,11 @@ class OnOffSwitch extends Component {
   }
 
   render() {
-    const {
-      isActive,
-      mode,
-      showNotification,
-      fbLastAction
-    } = this.props;
+    const { isActive, mode, showNotification } = this.props;
     const { showModal, dialogType } = this.state;
-
+    
     return (
-      <div>
-        {/* 
-        <SwitchWrapper>
-          <OnOff color={mode === 'manual' ? '#7AC943' : '#BDBDBD'}>Manual</OnOff>
-          <Switch
-            checked={mode === 'auto'}
-            onChange={() => this.handleToggleModal(true, 'mode')}
-            value="mode"
-            color="primary"
-          />
-          <OnOff color={mode === 'auto' ? '#7AC943' : '#BDBDBD'}>Auto</OnOff>
-        </SwitchWrapper>*/}
+      <Fragment>
         <SwitchWrapper
           onClick={this.handleNotifyDisabled}>
           <OnOff color={isActive ? '#BDBDBD' : '#7AC943'}>Off</OnOff>
@@ -75,12 +64,10 @@ class OnOffSwitch extends Component {
           show={showModal}
           onClose={() => this.handleToggleModal(false)}
           showNotification={showNotification}
-          fbLastAction={fbLastAction}
           isActive={isActive}
           mode={mode}
         />
-
-      </div>
+      </Fragment>
     );
   }
 };

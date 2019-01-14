@@ -76,7 +76,6 @@ class MultiChart extends Component {
     // }
 
     render() {
-        console.log(this.props.fbStatusList.length)
         const { chartOption } = this.state;
         const daysArray = [6, 5, 4, 3, 2, 1, 0]
         const monthArray = [...Array(30).keys()]

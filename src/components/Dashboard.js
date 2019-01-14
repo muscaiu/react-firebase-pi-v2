@@ -1,25 +1,27 @@
 import React, { Fragment } from "react";
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { firestoreConnect, isLoaded } from 'react-redux-firebase';
 import { compose } from 'redux';
 
 import NotificationAlert from "react-notification-alert";
-import {
-  Row,
-  Col,
-} from "reactstrap";
+import { Row, Col } from "reactstrap";
 
 import Header from 'components/Header/Header';
 import Spinner from 'components/Header/Spinner';
 import MultiChart from 'components/Charts/MultiChart';
 
 class Dashboard extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      bigChartData: "data1"
-    };
+  static proptypes = {
+    fbStatus: PropTypes.bool.isRequired,
+    fbMode: PropTypes.string.isRequired,
+    fbLastAction: PropTypes.instanceOf(Date).isRequired
   }
+
+  state = {
+    bigChartData: "data1"
+  };
+
   setBgChartData = name => {
     this.setState({
       bigChartData: name
