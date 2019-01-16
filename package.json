@@ -107,7 +107,8 @@
       "jsx",
       "node",
       "mjs"
-    ]
+    ],
+    "setupTestFrameworkScriptFile": "<rootDir>/src/tests/setup.js"
   },
   "babel": {
     "presets": [
@@ -116,5 +117,12 @@
   },
   "eslintConfig": {
     "extends": "react-app"
+  },
+  "devDependencies": {
+    "enzyme": "^3.8.0",
+    "enzyme-adapter-react-16": "^1.7.1",
+    "enzyme-to-json": "^3.3.5",
+    "prop-types": "^15.6.2",
+    "redux-mock-store": "^1.5.3"
   }
 }

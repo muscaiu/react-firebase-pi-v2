@@ -22,8 +22,8 @@ const LogoImg = styled.img`
 
 class Logo extends Component {
   static propTypes = {
-    isActive: PropTypes.bool.isRequired,
-    showNotification: PropTypes.func.isRequired
+    isActive: PropTypes.bool,
+    showNotification: PropTypes.func
   };
 
   handleTestClick = () => {

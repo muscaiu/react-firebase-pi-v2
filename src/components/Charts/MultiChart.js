@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types';
 import { Line } from "react-chartjs-2";
 import classNames from "classnames";
 import moment from 'moment';
@@ -18,6 +19,14 @@ import {
 import { chartExample1 } from "variables/charts";
 
 class MultiChart extends Component {
+    static proptypes = {
+        fbStatusList: PropTypes.array
+    }
+
+    static defaultProps = {
+        fbStatusList: [],
+    };
+
     state = {
         chartOption: "week"
     };

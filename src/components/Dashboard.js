@@ -15,18 +15,9 @@ class Dashboard extends React.Component {
   static proptypes = {
     fbStatus: PropTypes.bool.isRequired,
     fbMode: PropTypes.string.isRequired,
-    fbLastAction: PropTypes.instanceOf(Date).isRequired
+    fbLastAction: PropTypes.object
   }
 
-  state = {
-    bigChartData: "data1"
-  };
-
-  setBgChartData = name => {
-    this.setState({
-      bigChartData: name
-    });
-  };
   showNotification = (place, type, message) => {
     // primary, success, dandger, warning, info
     const options = {

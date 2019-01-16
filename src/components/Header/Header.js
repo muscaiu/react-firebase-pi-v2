@@ -36,7 +36,8 @@ class Header extends Component {
   static proptypes = {
     fbStatus: PropTypes.bool.isRequired,
     fbMode: PropTypes.string.isRequired,
-    showNotification: PropTypes.func.isRequired
+    showNotification: PropTypes.func.isRequired,
+    fbLastAction: PropTypes.object
   }
 
   state = {

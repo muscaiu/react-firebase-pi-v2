@@ -14,9 +14,9 @@ const SwitchWrapper = styled.div`
 
 class OnOffSwitch extends Component {
   static propTypes = {
-    isActive: PropTypes.bool.isRequired,
+    isActive: PropTypes.bool,
     mode: PropTypes.string,
-    showNotification: PropTypes.func.isRequired
+    showNotification: PropTypes.func
   };
 
   state = {
@@ -43,7 +43,7 @@ class OnOffSwitch extends Component {
   render() {
     const { isActive, mode, showNotification } = this.props;
     const { showModal, dialogType } = this.state;
-    
+
     return (
       <Fragment>
         <SwitchWrapper
