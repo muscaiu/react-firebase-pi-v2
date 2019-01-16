@@ -1,6 +1,7 @@
 # Raspberry Pi test project aiming to control lights
 # Uses React, MaterialUI on the Fe and Express on the BE
 
+[![Build Status](https://travis-ci.org/muscaiu/react-firebase-pi-v2.svg?branch=master)](https://travis-ci.com/muscaiu/react-firebase-pi-v2)
 # First thigs to do after installing Pi
   
 1. Assign static ip to the Pi  
