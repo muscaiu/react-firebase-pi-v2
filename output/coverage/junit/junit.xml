@@ -1,0 +1,6 @@
+<testsuites name="jest tests" tests="1" failures="0" time="5.416">
+  <testsuite name="src\components\Header\__tests__\Spinner.spec.js" errors="0" failures="0" skipped="0" timestamp="2019-01-16T12:10:13" time="5.349" tests="1">
+    <testcase classname="Header should match snapshot" name="Header should match snapshot" time="0.012">
+    </testcase>
+  </testsuite>
+</testsuites>
