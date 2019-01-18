@@ -95,7 +95,7 @@ class Admin extends React.Component {
   render() {
     return (
       <Fragment>
-        
+
         <div className="wrapper">
           {/* <Sidebar
             {...this.props}
