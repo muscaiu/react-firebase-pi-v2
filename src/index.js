@@ -16,7 +16,6 @@ import fbConfig from './config/fbConfig';
 import rootReducer from './reducers/rootReducer';
 import registerServiceWorker from './registerServiceWorker';
 
-// import App from './App';
 import AdminLayout from './layouts/Admin';
 
 const store = createStore(rootReducer,
@@ -32,7 +31,7 @@ const hist = createBrowserHistory();
 ReactDOM.render(
     <Provider store={store}>
         <Router history={hist}>
-            <Switch>                
+            <Switch>
                 <Route path="/" render={props => <AdminLayout {...props} />} />
                 {/* <Redirect from="/" to="/dashboard" /> */}
             </Switch>

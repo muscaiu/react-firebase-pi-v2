@@ -18,7 +18,6 @@ describe('Spinner', () => {
         // const store = mockStore(state);
         // const wrapper = shallow(<Spinner />, { context: { store } });
         expect(wrapper.find('.preloader')).toHaveLength(1);
-        console.log(wrapper.debug());
     });
 })
 
