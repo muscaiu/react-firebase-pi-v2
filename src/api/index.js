@@ -99,9 +99,9 @@ statusRef
   });
 
 //seconds(0-59), minutes(0-59), hours(0-23), day of month(1-31), months0-11, day of week(0-6)
-const customMinute = 0;
-const customHour = 19;
-const startTime = new CronJob(`00 ${customMinute} ${customHour} * * *`, function() {
+const customMinute = 00;
+const customHour = 21;
+const startTime = new CronJob(`00 ${customMinute} ${customHour} * * *`, function () {
   if (mode === 'auto') {
     statusRef.add({
       value: true,
@@ -114,7 +114,7 @@ const startTime = new CronJob(`00 ${customMinute} ${customHour} * * *`, function
   }
 });
 
-const stopTime = new CronJob(`00 ${customMinute} ${customHour + 1} * * *`, function() {
+const stopTime = new CronJob(`00 ${customMinute} ${customHour + 1} * * *`, function () {
   if (mode === 'auto') {
     statusRef.add({
       value: false,
@@ -134,7 +134,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cors());
 
-router.get('/test', function(req, res) {
+router.get('/test', function (req, res) {
   const currVal = relay.readSync();
 
   console.log('request status', currVal);
@@ -149,7 +149,7 @@ router.get('/test', function(req, res) {
   }
 });
 
-app.listen(port, function() {
+app.listen(port, function () {
   console.log(`API running on port ${port}`);
 });
 
